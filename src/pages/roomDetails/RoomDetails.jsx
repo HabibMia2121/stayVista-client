@@ -3,6 +3,9 @@ import Container from "../../components/Shared/Container";
 import { useEffect, useState } from "react";
 import Loader from "../../components/Shared/Loader";
 import { Helmet } from "react-helmet-async";
+import Header from "../../components/roomDetails/Header";
+import RoomInfo from "../../components/roomDetails/RoomInfo";
+import RoomReservation from "../../components/roomDetails/RoomReservation";
 
 const RoomDetails = () => {
     const { id } = useParams();
@@ -30,16 +33,21 @@ const RoomDetails = () => {
                 <title>StayVista | {rooms.title}</title>
             </Helmet>
 
-            <div>
+            {/* room info main content here */}
+            <div className=" max-w-screen-md mx-auto">
                 <div className="flex flex-col gap-6">
-                    {/* Header  and image*/}
+                    <Header room={rooms} />
                 </div>
-                <div>
-                    <div>
-                        {/* room info */}
-                    </div>
-                    <div>
-                        {/* calender here */}
+                <div className=" grid grid-cols-1 md:grid-cols-7 gap-4 mt-12 mb-7">
+                    {/* room info part */}
+                    <RoomInfo roomInfo={rooms} />
+
+                    {/* room reservation and calender part */}
+                    <div className=" md:col-span-3 order-first md:order-last">
+                        {/*room reservation  here */}
+                        <RoomReservation
+                            room={rooms}
+                        />
                     </div>
                 </div>
             </div>
