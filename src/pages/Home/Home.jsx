@@ -3,6 +3,7 @@ import Categories from "../../components/Categories/Categories"
 import Room from "../../components/Room/Room"
 
 const Home = () => {
+
   return (
     <div>
       {/* meta tags  */}
@@ -11,9 +12,9 @@ const Home = () => {
       </Helmet>
 
       {/* category section here */}
-      <Categories/>
+      <Categories />
       {/* Rooms section here */}
-      <Room/>
+      <Room />
     </div>
   )
 }

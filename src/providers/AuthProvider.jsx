@@ -12,9 +12,12 @@ import {
   updateProfile,
 } from 'firebase/auth'
 import { app } from '../firebase/firebase.config'
+import { clearCookie } from '../api/auth'
+import toast from 'react-hot-toast'
 
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
+
 const googleProvider = new GoogleAuthProvider()
 
 const AuthProvider = ({ children }) => {
@@ -41,12 +44,15 @@ const AuthProvider = ({ children }) => {
     return sendPasswordResetEmail(auth, email)
   }
 
-  const logOut = () => {
-    setLoading(true)
-    return signOut(auth)
+  const logOut = async() => {
+    setLoading(true);
+    await clearCookie();
+    toast.success('LogOut completed!')
+    return signOut(auth);
   }
 
   const updateUserProfile = (name, photo) => {
+    setLoading(true)
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,

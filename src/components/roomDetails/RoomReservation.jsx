@@ -15,7 +15,7 @@ const RoomReservation = ({ room }) => {
     const [value, setValue] = useState({
         startDate: new Date(room?.from),
         endDate: new Date(room?.to),
-        key:'selection'
+        key: 'selection'
     })
 
     return (
@@ -27,7 +27,7 @@ const RoomReservation = ({ room }) => {
             <hr />
             {/* create custom component */}
             <div className="flex justify-center ">
-                <Calender value={value}/>
+                <Calender value={value} />
             </div>
             <hr />
             <div className=" p-4">
