@@ -1,6 +1,18 @@
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import useAuth from "../../../../hooks/useAuth";
+import { getHostRoom } from "../../../../api/rooms";
+import RoomDataRow from "../tableRows/RoomDataRow";
 
 const MyListings = () => {
+    const { user } = useAuth();
+    const [rooms, setRooms] = useState([])
+
+    useEffect(() => {
+        getHostRoom(user?.email).then(data => setRooms(data))
+        
+    },[user])
+
     return (
         <>
             {/* website name title */}
@@ -61,7 +73,9 @@ const MyListings = () => {
                                 </thead>
                                 <tbody>
                                     {/* Room row data */}
-                                
+                                    {
+                                        rooms?.map(room => <RoomDataRow key={room?._id} room={ room} />)
+                                    }
                                 </tbody>
                             </table>
                         </div>

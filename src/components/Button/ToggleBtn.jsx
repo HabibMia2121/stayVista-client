@@ -1,5 +1,5 @@
 
-const ToggleBtn = ( toggleHandler ) => {
+const ToggleBtn = ({ toggleHandler }) => {
     return (
         <>
             <label

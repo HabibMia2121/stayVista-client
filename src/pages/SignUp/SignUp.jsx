@@ -28,7 +28,7 @@ const SignUp = () => {
 
       // get token from server
       await getToken(result?.user?.email)
-      navigate('/');
+      navigate('/');  
       toast.success('Sign up successfully!')
 
 

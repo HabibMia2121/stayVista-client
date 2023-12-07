@@ -1,9 +1,11 @@
 import axios from "axios";
-import { clearCookie } from "../api/auth";
+import {
+    clearCookie
+} from "../api/auth";
 
 const axiosSecure = axios.create({
-     baseURL: 'http://localhost:5000',
-     withCredentials: true,
+    baseURL: 'http://localhost:5000',
+    withCredentials: true,
 })
 
 const useAxiosSecure = () => {
