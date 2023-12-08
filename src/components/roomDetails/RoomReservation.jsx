@@ -4,8 +4,18 @@ import { formatDistance } from "date-fns";
 import Button from "../Button/Button";
 import Calender from "./Calender";
 import { useState } from "react";
+import BookingModal from "../modal/BookingModal";
+import useAuth from "../../hooks/useAuth";
 
 const RoomReservation = ({ room }) => {
+    console.log(room);
+    const { user } = useAuth()
+    // state use for modal
+    let [isOpen, setIsOpen] = useState(false);
+    const closeModal = () => {
+        setIsOpen(false)
+    }
+
     // dateDistance get 
     const totalDays = parseInt(formatDistance(new Date(room?.to), new Date(room?.from)).split(' ')[0]);
 
@@ -16,6 +26,16 @@ const RoomReservation = ({ room }) => {
         startDate: new Date(room?.from),
         endDate: new Date(room?.to),
         key: 'selection'
+    })
+
+    // bookingInfo here
+    const [bookingInfo, setBookingInfo] = useState({
+        guest: {
+            name: user?.displayName,
+            email: user?.email,
+            image: user?.photoURL
+        },
+        host: room?.host?.email
     })
 
     return (
@@ -32,6 +52,7 @@ const RoomReservation = ({ room }) => {
             <hr />
             <div className=" p-4">
                 <Button
+                    onClick={() => setIsOpen(true)}
                     label={'Reserve'}
                 />
             </div>
@@ -40,6 +61,12 @@ const RoomReservation = ({ room }) => {
                 <div>Total</div>
                 <div>${totalPrice}</div>
             </div>
+
+            {/* bookingModal here */}
+            <BookingModal
+                closeModal={closeModal}
+                isOpen={isOpen}
+            />
         </div>
     );
 };
