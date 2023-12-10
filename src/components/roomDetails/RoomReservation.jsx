@@ -8,7 +8,7 @@ import BookingModal from "../modal/BookingModal";
 import useAuth from "../../hooks/useAuth";
 
 const RoomReservation = ({ room }) => {
-    console.log(room);
+    // console.log(room);
     const { user } = useAuth()
     // state use for modal
     let [isOpen, setIsOpen] = useState(false);
@@ -35,7 +35,16 @@ const RoomReservation = ({ room }) => {
             email: user?.email,
             image: user?.photoURL
         },
-        host: room?.host?.email
+        host: room?.host?.email,
+        location: room?.location,
+        price: totalPrice,
+        to:value?.endDate,
+        from: value?.startDate,
+        title: room?.title,
+        roomId: room?._id,
+        image: room?.image
+
+
     })
 
     return (
@@ -66,6 +75,7 @@ const RoomReservation = ({ room }) => {
             <BookingModal
                 closeModal={closeModal}
                 isOpen={isOpen}
+                bookingInfo={bookingInfo}
             />
         </div>
     );
